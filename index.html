@@ -182,4 +182,57 @@
 
         <div class="card">
             <h3>Reporte 2 – google-gruyere.appspot.com</h3>
-            <p
+            <p>Evaluación educativa con detección de configuraciones inseguras.</p>
+            <a class="btn" href="MitraScan_Report_20251204_193515.html">Ver Reporte</a>
+        </div>
+
+        <div class="card">
+            <h3>Reporte 3 – OWASP Juice Shop</h3>
+            <p>Aplicación vulnerable — múltiples hallazgos críticos.</p>
+            <a class="btn" href="MitraScan_Report_20251204_195709.html">Ver Reporte</a>
+        </div>
+
+        <div class="card">
+            <h3>Reporte 4 – DVWA (localhost)</h3>
+            <p>Exposición severa de cabeceras, indexación y archivos sensibles.</p>
+            <a class="btn" href="MitraScan_Report_20251204_185101.html">Ver Reporte</a>
+        </div>
+    </div>
+
+    <footer>
+        Plataforma <span>MitraScan</span> — Auditoría Web Automatizada © 2025 | Desarrollado por Valentina Mendoza
+    </footer>
+
+    <script>
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+
+        canvas.height = window.innerHeight;
+        canvas.width = window.innerWidth;
+
+        const letters = "01";
+        const drops = Array(Math.floor(canvas.width / 10)).fill(1);
+
+        function draw() {
+            // Única modificación: rastro oscuro y sutil (0.05 opacidad)
+            ctx.fillStyle = "rgba(0,0,0,0.05)"; 
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = "#00ff95";
+            ctx.font = "14px monospace";
+
+            drops.forEach((y, index) => {
+                const text = letters.charAt(Math.floor(Math.random() * letters.length));
+                const x = index * 10;
+                ctx.fillText(text, x, y);
+
+                // Lógica original restaurada (caída de 20px)
+                drops[index] = y > canvas.height ? 0 : y + 20;
+            });
+        }
+
+        setInterval(draw, 50);
+    </script>
+
+</body>
+</html>
