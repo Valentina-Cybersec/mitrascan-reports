@@ -16,17 +16,17 @@
             overflow-x: hidden;
         }
 
-        /* Fondo MATRIX restaurado y oscuro */
-        canvas {
+        /* Ajuste del Canvas idéntico al de tu Home */
+        #matrix {
             position: fixed;
-            top: 0;
-            left: 0;
-            z-index: -10;
+            inset: 0;
+            z-index: -1;
+            opacity: 0.12; /* Nivel de transparencia de la Home */
             width: 100%;
             height: 100%;
         }
 
-        /* NAVBAR - Restaurado original */
+        /* NAVBAR */
         nav {
             background: rgba(10, 15, 20, 0.85);
             backdrop-filter: blur(6px);
@@ -46,7 +46,7 @@
         }
 
         nav .links a {
-            color: #b8ffdd; /* Restaurado color original */
+            color: #b8ffdd;
             margin-left: 18px;
             text-decoration: none;
             font-size: 1rem;
@@ -91,7 +91,7 @@
             50% { border-color: transparent; }
         }
 
-        /* CARDS - Restaurado estilo original */
+        /* CARDS */
         .container {
             max-width: 1100px;
             margin: 40px auto;
@@ -102,8 +102,8 @@
         }
 
         .card {
-            background-color: rgba(15, 20, 25, 0.92); /* Restaurado original */
-            border: 1px solid #1f2b36; /* Restaurado borde gris original */
+            background-color: rgba(15, 20, 25, 0.92);
+            border: 1px solid #1f2b36;
             border-radius: 12px;
             padding: 22px;
             transition: 0.25s ease-in-out;
@@ -118,7 +118,7 @@
 
         .card h3 {
             margin-top: 0;
-            color: #00ff95; /* Restaurado original */
+            color: #00ff95;
             font-size: 1.3rem;
         }
 
@@ -139,7 +139,6 @@
             box-shadow: 0 0 12px rgba(0,255,149,0.45);
         }
 
-        /* FOOTER */
         footer {
             margin-top: 50px;
             padding: 20px;
@@ -151,10 +150,8 @@
         footer span {
             color: #00ff95;
         }
-
     </style>
 </head>
-
 <body>
 
     <canvas id="matrix"></canvas>
@@ -200,38 +197,36 @@
     </div>
 
     <footer>
-        Plataforma <span>MitraScan</span> — Auditoría Web Automatizada © 2025 | Desarrollado por Valentina Mendoza
+        Plataforma <span>MitraScan</span> — Auditoría Web Automatizada © 2026 | Desarrollado por Valentina Mendoza
     </footer>
 
     <script>
-        const canvas = document.getElementById('matrix');
-        const ctx = canvas.getContext('2d');
+    const canvas = document.getElementById('matrix'),
+          ctx = canvas.getContext('2d');
 
-        canvas.height = window.innerHeight;
+    function resize() {
         canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
 
-        const letters = "01";
-        const drops = Array(Math.floor(canvas.width / 10)).fill(1);
+    const drops = new Array(Math.floor(window.innerWidth / 14)).fill(1);
 
-        function draw() {
-            // Única modificación: rastro oscuro y sutil (0.05 opacidad)
-            ctx.fillStyle = "rgba(0,0,0,0.05)"; 
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+    function draw() {
+        ctx.fillStyle = 'rgba(6,9,13,0.15)'; // El color y rastro de la Home
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = '#00ff95';
+        ctx.font = '12px monospace'; // Fuente más pequeña como en la Home
+        
+        drops.forEach((y, i) => {
+            ctx.fillText(Math.random() > 0.5 ? '0' : '1', i * 14, y * 14);
+            if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+            drops[i]++;
+        });
+    }
 
-            ctx.fillStyle = "#00ff95";
-            ctx.font = "14px monospace";
-
-            drops.forEach((y, index) => {
-                const text = letters.charAt(Math.floor(Math.random() * letters.length));
-                const x = index * 10;
-                ctx.fillText(text, x, y);
-
-                // Lógica original restaurada (caída de 20px)
-                drops[index] = y > canvas.height ? 0 : y + 20;
-            });
-        }
-
-        setInterval(draw, 50);
+    setInterval(draw, 60); // Velocidad sincronizada con la Home
     </script>
 
 </body>
