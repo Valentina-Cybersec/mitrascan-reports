@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MitraScan – Auditoría Web Automatizada</title>
 
-    <!-- FUENTE -->
     <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@300;400;600&display=swap" rel="stylesheet">
 
     <style>
@@ -17,25 +16,28 @@
             overflow-x: hidden;
         }
 
-        /* Fondo MATRIX animado */
-        canvas {
+        /* Fondo MATRIX sincronizado con la Home */
+        #matrix {
             position: fixed;
-            top: 0;
-            left: 0;
-            z-index: -10;
+            inset: 0;
+            z-index: -1;
+            opacity: 0.12; /* Nivel de transparencia idéntico al Home */
             width: 100%;
             height: 100%;
         }
 
         /* NAVBAR */
         nav {
-            background: rgba(10, 15, 20, 0.85);
-            backdrop-filter: blur(6px);
-            border-bottom: 1px solid #00ff95;
+            background: rgba(5, 8, 10, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 255, 149, 0.1);
             padding: 15px 25px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         nav .logo {
@@ -47,7 +49,7 @@
         }
 
         nav .links a {
-            color: #b8ffdd;
+            color: #99bfb0;
             margin-left: 18px;
             text-decoration: none;
             font-size: 1rem;
@@ -56,10 +58,9 @@
 
         nav .links a:hover {
             color: #00ff95;
-            text-shadow: 0 0 8px #00ff95;
         }
 
-        /* HEADER CON TEXTO TIPO TERMINAL */
+        /* HEADER */
         header {
             text-align: center;
             padding: 70px 20px 30px;
@@ -92,7 +93,7 @@
             50% { border-color: transparent; }
         }
 
-        /* CARDS */
+        /* CARDS con estilo de la Home */
         .container {
             max-width: 1100px;
             margin: 40px auto;
@@ -103,23 +104,23 @@
         }
 
         .card {
-            background-color: rgba(15, 20, 25, 0.92);
-            border: 1px solid #1f2b36;
+            background: rgba(15, 20, 24, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 149, 0.05);
             border-radius: 12px;
             padding: 22px;
-            transition: 0.25s ease-in-out;
-            box-shadow: 0 0 12px rgba(0,255,149,0.05);
+            transition: 0.3s;
         }
 
         .card:hover {
             border-color: #00ff95;
-            box-shadow: 0 0 18px rgba(0,255,149,0.25);
-            transform: translateY(-4px);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 255, 149, 0.05);
         }
 
         .card h3 {
             margin-top: 0;
-            color: #00ff95;
+            color: #38bdf8;
             font-size: 1.3rem;
         }
 
@@ -127,26 +128,28 @@
             display: inline-block;
             margin-top: 15px;
             padding: 10px 18px;
-            background-color: #00ff95;
-            color: #0b0f13;
+            background: rgba(0, 255, 149, 0.02);
+            color: #00ff95;
             text-decoration: none;
             font-weight: bold;
+            border: 1px solid #00ff95;
             border-radius: 6px;
-            transition: 0.25s ease-in-out;
+            transition: 0.3s;
         }
 
         .btn:hover {
-            background-color: #0af78d;
-            box-shadow: 0 0 12px rgba(0,255,149,0.45);
+            background: #00ff95;
+            color: #05110a;
+            box-shadow: 0 0 20px rgba(0, 255, 149, 0.4);
         }
 
-        /* FOOTER */
         footer {
             margin-top: 50px;
-            padding: 20px;
+            padding: 50px;
             text-align: center;
-            color: #8cc4b3;
+            color: #99bfb0;
             font-size: 0.9rem;
+            background: rgba(5, 8, 10, 0.85);
         }
 
         footer span {
@@ -158,10 +161,8 @@
 
 <body>
 
-    <!-- Fondo matrix -->
     <canvas id="matrix"></canvas>
 
-    <!-- NAVBAR -->
     <nav>
         <div class="logo">MitraScan</div>
         <div class="links">
@@ -171,73 +172,62 @@
         </div>
     </nav>
 
-    <!-- HEADER -->
     <header>
         <h1>Auditoría Web Automatizada</h1>
         <div id="terminal-text">> Cargando reportes de vulnerabilidades...</div>
     </header>
 
-    <!-- CARDS -->
     <div class="container">
-
         <div class="card">
             <h3>Reporte 1 – testphp.vulnweb.com</h3>
             <p>Análisis técnico de vulnerabilidades en entorno de prueba público.</p>
-            <a class="btn" href="MitraScan_Report_20251204_185400.html">Ver Reporte</a>
+            <a class="btn" href="#">Ver Reporte</a>
         </div>
 
         <div class="card">
             <h3>Reporte 2 – google-gruyere.appspot.com</h3>
             <p>Evaluación educativa con detección de configuraciones inseguras.</p>
-            <a class="btn" href="MitraScan_Report_20251204_193515.html">Ver Reporte</a>
+            <a class="btn" href="#">Ver Reporte</a>
         </div>
-
-        <div class="card">
-            <h3>Reporte 3 – OWASP Juice Shop</h3>
-            <p>Aplicación vulnerable — múltiples hallazgos críticos.</p>
-            <a class="btn" href="MitraScan_Report_20251204_195709.html">Ver Reporte</a>
-        </div>
-
-        <div class="card">
-            <h3>Reporte 4 – DVWA (localhost)</h3>
-            <p>Exposición severa de cabeceras, indexación y archivos sensibles.</p>
-            <a class="btn" href="MitraScan_Report_20251204_185101.html">Ver Reporte</a>
-        </div>
-
     </div>
 
     <footer>
-        Plataforma <span>MitraScan</span> — Auditoría Web Automatizada © 2025 | Desarrollado por Valentina Mendoza
+        Plataforma <span>MitraScan</span> — Auditoría Web Automatizada © 2026 | Desarrollado por Valentina Mendoza
     </footer>
 
-    <!-- SCRIPT MATRIX -->
     <script>
         const canvas = document.getElementById('matrix');
         const ctx = canvas.getContext('2d');
 
-        canvas.height = window.innerHeight;
-        canvas.width = window.innerWidth;
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resize();
+        window.addEventListener('resize', resize);
 
-        const letters = "01";
-        const drops = Array(Math.floor(canvas.width / 10)).fill(1);
+        const drops = new Array(Math.floor(window.innerWidth / 14)).fill(1);
 
         function draw() {
-            ctx.fillStyle = "rgba(0,0,0,0.05)";
+            // El color de fondo y opacidad para el rastro idéntico a la Home
+            ctx.fillStyle = 'rgba(6, 9, 13, 0.15)'; 
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            ctx.fillStyle = "#00ff95";
-            ctx.font = "14px monospace";
-
-            drops.forEach((y, index) => {
-                const text = letters.charAt(Math.floor(Math.random() * letters.length));
-                const x = index * 10;
-                ctx.fillText(text, x, y);
-
-                drops[index] = y > canvas.height ? 0 : y + 20;
+            
+            ctx.fillStyle = '#00ff95';
+            ctx.font = '12px monospace';
+            
+            drops.forEach((y, i) => {
+                const text = Math.random() > 0.5 ? '0' : '1';
+                ctx.fillText(text, i * 14, y * 14);
+                
+                if (y * 14 > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
             });
         }
 
-        setInterval(draw, 50);
+        setInterval(draw, 60);
     </script>
 
 </body>
